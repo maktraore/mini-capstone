@@ -1,0 +1,10 @@
+<tr>
+   <td><%= @product.name %> </td>
+    <td><%= @product.price %> </td>
+    <td><%= @product.description %> </td> 
+    <td><%= @product.remaining %> </td>
+    <td><%= @product.image %></td>
+</tr>
+<%= form_tag "/products/#{@product.id}", method: :delete do %>
+ <input type="submit", value = "Delete product! ">
+ <% end %>
