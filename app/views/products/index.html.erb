@@ -1,5 +1,5 @@
 <div><a href="/products/new"> create new product !!!</a></div>
-<table class ="table table-striped table-bordered">
+<!-- <table class ="table table-bordered">
 
   <tr>
      <th>Products</th>
@@ -8,19 +8,29 @@
      <th>Remaning</th>
      <th>image</th>
      <th colspan= "3"></th>
-   </tr>
-   <tr>
- <% @products.each do |product| %>
-    <td><a href="/products/<%= product.id %>"> <%= product.name %>  </a></td>
-    <td><%= product.price %> </td>
-    <td><%= product.description %> </td> 
-    <td><%= product.remaining %> </td>
-    <td><%= product.image %></td>
-    <td><%= link_to "Show", "/products/#{product.id}", method: :get %></td>
-    <td><%= link_to "Edit", "/products/#{product.id}/edit", method: :get %></td>
-    <td><%= link_to "Delete", "/products/#{product.id}", data: {confirm: "Are you sure?"}, method: :delete  %></td>
-  </tr>
+   </tr> -->
+ <% @products.each_slice(3) do |product_slice| %>
+ <div class="row">
+   <!-- <tr> -->
+ <!-- <div class="well"> -->
+ <% product_slice.each do |product| %>
+    <div class="col-md-4">
+        <a href="/products/<%= product.id %>"> <%= product.name %>  </a>
+        <%= product.price %> 
+        <%= product.description %>  
+        <%= product.remaining %> 
+        
+        <img src="<%= product.image %>">
+            
+          
+        <p> <%= link_to "Show", "/products/#{product.id}", method: :get %></p>
+        <p> <%= link_to "Edit", "/products/#{product.id}/edit", method: :get %> </p>
+        <p> <%= link_to "Delete", "/products/#{product.id}", data: {confirm: "Are you sure?"}, method: :delete  %> </p>
+    </div>
+ <% end %>
+ </div>
 <% end %>
+<!--   </tr>
 </table>
-
+ -->
 

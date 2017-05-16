@@ -1,6 +1,7 @@
 class ProductsController < ApplicationController
   def index
     @products = Product.all
+
      render "index.html.erb"
   end
    def show
@@ -8,9 +9,11 @@ class ProductsController < ApplicationController
     render 'show.html.erb'
    end
   def create
-      @new_product = Product.create(name: params[:name_param], price: params[:price_param], description: params[:description_param], remaining: params[:remaining_param], image: params[:image_param])
-      @new_product.save
-    render "create.html.erb"
+      @product = Product.create(name: params[:name_param], price: params[:price_param], description: params[:description_param], remaining: params[:remaining_param], image: params[:image_param])
+      @product.save
+    # render "create.html.erb"
+    redirect_to "/products/#{@product.id}"
+    flash[:info] = "Your product has been creatted"
   end
   def new
     render 'new.html.erb'
@@ -18,6 +21,7 @@ class ProductsController < ApplicationController
   def edit
     @product = Product.find_by(id: params[:id])
     render 'edit.html.erb'
+    # redirect_to "/products/#{@product.id}/edit"
   end
   def update
     @product = Product.find_by(id: params[:id])
@@ -26,11 +30,15 @@ class ProductsController < ApplicationController
     @product.description = params[:description_param]
     @product.remaining = params[:remaining_param]
     @product.image = params[:image_param]
-    render "update.html.erb"
+    @product.save
+    redirect_to "/products/#{@product.id}"
+    # render "update.html.erb"
+     flash[:success] = "Your product has been updated"
   end
   def destroy
      @product = Product.find_by(id: params[:id])
      @product.destroy
-     render "destroy.html.erb"
+     redirect_to "/products/"
+     flash[:danger] = "Your product has been deleted"
   end
 end
