@@ -1,36 +1,35 @@
-<div><a href="/products/new"> create new product !!!</a></div>
-<!-- <table class ="table table-bordered">
+<!-- <h1>You have visited this page <%= pluralize(@visit_count, "number of time") %> </h1> -->
+<div class="container top">
+<div><a href="/products/new"><h3> create new product !!!</h3></a></div>
+<div> <a href="/products?sort=price&sort_order=asc"> Order by price lowest to highest </a></div>
+<div> <a href="/products?sort=price&sort_order=desc"> Order by price highest to lowest </a></div>
+<div><a href="/products?discount=true">Discount Items</a></div>
+<div><a href="/products/random">Random Product</a></div> </br>
 
-  <tr>
-     <th>Products</th>
-     <th>Prices</th>
-     <th>Descriptions</th>
-     <th>Remaning</th>
-     <th>image</th>
-     <th colspan= "3"></th>
-   </tr> -->
  <% @products.each_slice(3) do |product_slice| %>
  <div class="row">
-   <!-- <tr> -->
- <!-- <div class="well"> -->
+
  <% product_slice.each do |product| %>
     <div class="col-md-4">
-        <a href="/products/<%= product.id %>"> <%= product.name %>  </a>
-        <%= product.price %> 
-        <%= product.description %>  
-        <%= product.remaining %> 
-        
-        <img src="<%= product.image %>">
-            
+        Name: <a href="/products/<%= product.id %>"> <%= product.name %>  </a>
+        <p> Price: $<%= product.price %>   Desc: <%= product.description %>  </p>
+        <p> Remaining: <%= product.remaining %>     Supplier: <%= product.supplier.name %></p>
+        <img class= "size" src="<%= product.images.last.url %>">
           
-        <p> <%= link_to "Show", "/products/#{product.id}", method: :get %></p>
-        <p> <%= link_to "Edit", "/products/#{product.id}/edit", method: :get %> </p>
-        <p> <%= link_to "Delete", "/products/#{product.id}", data: {confirm: "Are you sure?"}, method: :delete  %> </p>
-    </div>
+        <div id ="navigation">
+        <ul>
+        <li><%= link_to "Show", "/products/#{product.id}", method: :get %></li>   
+        <li><%= link_to "Edit", "/products/#{product.id}/edit", method: :get %> </li>  
+        <li><%= link_to "Add Image", "/products/#{product.id}/images/new", method: :get %> </li> 
+        <li><%= link_to "Edit Image", "/products/#{product.id}/images/new", method: :get %> </li> 
+       <li> <%= link_to "Delete", "/products/#{product.id}", data: {confirm: "Are you sure?"}, method: :delete  %></li> 
+       <li> <%= link_to "Delete Image", "/products/#{product.id}/image", data: {confirm: "Are you sure?"}, method: :delete  %></li> 
+        </ul>
+         </div>
+     </div>
  <% end %>
  </div>
+
 <% end %>
-<!--   </tr>
-</table>
- -->
+</div>
 

@@ -1,8 +1,9 @@
 <tr>
    Message: <p><%= @product.sale_message %> </p>
-    Price: <p><%= @product.price %> </p>
-    Tax: <p><%= @product.tax %> </p>
-    Total: <p><%= @product.total %> </p> 
+    Price: <%= @product.price %> Tax: <%= @product.tax %> Total: <%= @product.total %> <%= @product.supplier.name %>
+    <p><% @product.images.each do |image| %></p>
+       <img class = "size" src = "<%= image.url %>">
+      <% end %>
 </tr>
 <%= form_tag "/products/#{@product.id}", method: :delete do %>
  <input type="submit", value = "Delete product!">

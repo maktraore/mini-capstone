@@ -8,10 +8,30 @@ body {
   font-family: Tahoma,Verdana,Segoe,sans-serif; 
   background-image: url('pink dust.png');
   color: white;
+  padding-top: 40px;
   a {
     color: red;
   }
   input {
     color: black;
   }
+  .right {
+     margin-right: 50px;
+     margin-top: 25px;
+  }
+  #navigation ul
+{
+    margin: 0;
+    padding: 0;
+}
+
+#navigation ul li
+{
+    list-style-type: none;
+    display: inline;
+}
+
+#navigation li:not(:first-child):before {
+    content: " | ";
+}
 }
