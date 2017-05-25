@@ -1,21 +1,19 @@
 class ProductsController < ApplicationController
   def index
-    if session[:visit_count]
-      session[:visit_count]+=1
-    else
-      session[:visit_count] = 1
-    end
-    @visit_count = session[:visit_count]
-    if params[:sort] && params[:sort_order]
-      @products = Product.order(params[:sort] => params[:sort_order])
-    elsif params[:discount]
-      @products = Product.where("price < ?", 10)
-    elsif params[:search]
-      @products = Product.where("name ILIKE ?", "%#{params[:search]}%")
-    else
-    @products = Product.all
-    end
+    if current_user
+      if params[:sort] && params[:sort_order]
+        @products = Product.order(params[:sort] => params[:sort_order])
+      elsif params[:discount]
+        @products = Product.where("price < ?", 10)
+      elsif params[:search]
+        @products = Product.where("name ILIKE ?", "%#{params[:search]}%")
+      else
+      @products = Product.all
+      end
      render "index.html.erb"
+    else
+      redirect_to "/login"
+    end
   end
    def show
     if params[:id] == "random"

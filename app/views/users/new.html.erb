@@ -1,8 +1,9 @@
+
 <h2>Signup!</h2>
 <%= form_tag "/users", method: :post  do %>
- <div> Name: <input type="text" name = "Name"></div>
-<div> Email: <input type="email" name = "email"></div>
-<div> password: <input type="password" name = "password"></div>
-<div> password confirmation: <input type="text" name = "passconfirm"></div>
-<input type="submit" value="signup">
+ <div > Name: <input type="text" name = "name"></div>
+<div class ="right"> Email: <input type="email" name = "email"></div>
+<div class ="right"> password: <input type="password" name = "password"></div>
+<div class ="right"> password confirmation: <input type="password" name = "passconfirm"></div>
+<input class ="right" type="submit" value="signup">
 <% end %>

@@ -1,0 +1,8 @@
+<% @product.images.each do |image| %>
+       <img class = "size" src = "<%= image.url %>">
+       <%= form_tag "/products/#{@product.id}/images/#{image.id}", method: :patch do %>
+       Favorite? 
+       <input type="submit" value="Yes" name="favorite">
+       <% end %>
+       <div>#############</div>
+<% end %>

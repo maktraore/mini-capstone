@@ -14,16 +14,18 @@
         Name: <a href="/products/<%= product.id %>"> <%= product.name %>  </a>
         <p> Price: $<%= product.price %>   Desc: <%= product.description %>  </p>
         <p> Remaining: <%= product.remaining %>     Supplier: <%= product.supplier.name %></p>
-        <img class= "size" src="<%= product.images.last.url %>">
+        <img class= "size" src="<%= product.images.find_by(favorite: true).url %>">
+        <!-- <img class= "size" src="<%# product.images.where(favorite: true).last.url %>"> -->
           
         <div id ="navigation">
         <ul>
         <li><%= link_to "Show", "/products/#{product.id}", method: :get %></li>   
         <li><%= link_to "Edit", "/products/#{product.id}/edit", method: :get %> </li>  
         <li><%= link_to "Add Image", "/products/#{product.id}/images/new", method: :get %> </li> 
-        <li><%= link_to "Edit Image", "/products/#{product.id}/images/new", method: :get %> </li> 
-       <li> <%= link_to "Delete", "/products/#{product.id}", data: {confirm: "Are you sure?"}, method: :delete  %></li> 
-       <li> <%= link_to "Delete Image", "/products/#{product.id}/image", data: {confirm: "Are you sure?"}, method: :delete  %></li> 
+        <li><%= link_to "Edit Image ", "/products/#{product.id}/images/edit", method: :get %> </li> 
+        <li> <%= link_to "Delete", "/products/#{product.id}", data: {confirm: "Are you sure?"}, method: :delete  %></li> 
+        <li> <%= link_to "Delete Image", "/products/#{product.id}/image", data: {confirm: "Are you sure?"}, method: :delete  %>
+        </li> 
         </ul>
          </div>
      </div>

@@ -1,6 +1,8 @@
 class Product < ApplicationRecord
     belongs_to :supplier
     has_many :images
+    has_many :user
+    has_many :orders
     def sale_message
       if price < 2
         "Discount Item!" 
@@ -8,6 +10,7 @@ class Product < ApplicationRecord
         "Everyday Value!"
      end
    end
+
      def tax
        price*0.09
      end

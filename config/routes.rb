@@ -18,6 +18,8 @@ Rails.application.routes.draw do
   post "/images/new",      to: 'images#create'
 
   get "/products/:product_id/images/new", to: 'images#new'
+  get "/products/:product_id/images/edit", to: 'images#edit'
+  patch "/products/:product_id/images/:image_id", to: 'images#update'
   post "/products/:product_id/images", to: 'images#create'
   delete "/products/:product_id/image",    to: 'images#destroy'
   get "/signup", to: 'users#new'
@@ -26,4 +28,8 @@ Rails.application.routes.draw do
   get "/login", to: 'sessions#new'
   post '/login', to: 'sessions#create'
   get "/logout", to: 'sessions#destroy'
+
+  post "/orders", to: 'orders#create'
+  get '/orders/:id', to: 'orders#show'
+
 end
