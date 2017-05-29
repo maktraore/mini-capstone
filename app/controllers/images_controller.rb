@@ -1,9 +1,9 @@
 class ImagesController < ApplicationController
+  before_action :authenticate_admin!
     def index
       @images = Product.find_by(id: params[:product_id]).images
       @product = Product.find_by(id: params[:product_id])
       @images.all
-        
     end
 
     def edit
@@ -12,11 +12,11 @@ class ImagesController < ApplicationController
     end
 
     def update
-      @product = Product.find_by(id: params[:product_id])
-      @image = Image.find_by(id: params[:image_id])
+      @product = Product.find_by(id: params[:id])
+      @image = Image.find_by(product_id: @product.id)
       if params[:favorite] == "Yes"
         @product.images.update_all(favorite: false)
-        @image.update(favorite: true)
+        @image.update(favorite: true) if @product.images
       end
       # redirect_to "/products/#{@product.id}"
       redirect_to "/products"
@@ -28,12 +28,12 @@ class ImagesController < ApplicationController
   end
 
   def create
-    Image.create(url: params[:url], product_id: params[:product_id])
+    Image.create(url: params[:url], product_id: params[:product_id], favorite: true)
     redirect_to "/products/#{params[:product_id]}"
   end
    def destroy
      @product_images = Product.find_by(id: params[:product_id]).images
-     @product_images.last.destroy
+     @product_images.first.destroy
      redirect_to "/products/#{params[:product_id]}"
      flash[:danger] = "Your product image has been deleted"
   end

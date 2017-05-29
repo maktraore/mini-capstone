@@ -8,11 +8,6 @@
 # 10.times do 
 #   Product.create(name: Faker::Commerce.product_name, price: Faker::Commerce.price, description: Faker::Lorem.word, remaining:Faker::Number.number(1), image: Faker::Placeholdit.image)
 # end
-5.times do 
-  Image.create(url: Faker::Placeholdit.image, 
-    product_id: Product.all.each { |product|
-      product.id })
-end
 
 Product.all.each do |product|
   5.times do 

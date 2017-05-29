@@ -1,6 +1,7 @@
 class ProductsController < ApplicationController
+  #older version use filter_action
+  before_action :authenticate_admin!,  except: [:index, :show]
   def index
-    if current_user
       if params[:sort] && params[:sort_order]
         @products = Product.order(params[:sort] => params[:sort_order])
       elsif params[:discount]
@@ -11,9 +12,6 @@ class ProductsController < ApplicationController
       @products = Product.all
       end
      render "index.html.erb"
-    else
-      redirect_to "/login"
-    end
   end
    def show
     if params[:id] == "random"
@@ -24,13 +22,22 @@ class ProductsController < ApplicationController
     render 'show.html.erb'
    end
   def create
-      @product = Product.create(name: params[:name_param], price: params[:price_param], description: params[:description_param], remaining: params[:remaining_param])
-      @product.save
+      @product = Product.new(name: params[:name_param], price: params[:price_param], description: params[:description_param], remaining: params[:remaining_param], supplier_id: params[:supplier_id])
+      if @product.save
+        # @image = Image.find_by(product_id: params[:id])
+        @image = Image.create(product_id: @product.id, url: params[:url], favorite:true)
+        # @image.url = params[:url]
+        # @image.save
+    
     # render "create.html.erb"
-    redirect_to "/products/#{@product.id}"
+    redirect_to "/products"
     flash[:info] = "Your product has been creatted"
+      else
+       render 'new.html.erb'
+      end
   end
   def new
+    @product = Product.new
     render 'new.html.erb'
   end
   def edit
@@ -40,7 +47,7 @@ class ProductsController < ApplicationController
   end
   def update
     @product = Product.find_by(id: params[:id])
-    @image = Product.find_by(product_id: params[:product_id])
+    @image = Image.find_by(product_id: params[:id])
     @product.name = params[:name_param]
     @product.price = params[:price_param]
     @product.description = params[:description_param]
@@ -49,8 +56,9 @@ class ProductsController < ApplicationController
     @image.url = params[:url]
     # Image.create(url: params[:url], product_id: params[:product_id])
     @product.save
+    @image.save
     # redirect_to "/products/#{params[:product_id]}"
-    redirect_to "/products/#{@product.id}"
+    redirect_to "/products/"
     # render "update.html.erb"
      flash[:success] = "Your product has been updated"
   end
@@ -60,5 +68,4 @@ class ProductsController < ApplicationController
      redirect_to "/products/"
      flash[:danger] = "Your product has been deleted"
   end
- 
 end

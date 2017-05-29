@@ -1,6 +1,8 @@
 <!-- <h1>You have visited this page <%= pluralize(@visit_count, "number of time") %> </h1> -->
 <div class="container top">
+<% if current_user && current_user.admin %>
 <div><a href="/products/new"><h3> create new product !!!</h3></a></div>
+<% end %>
 <div> <a href="/products?sort=price&sort_order=asc"> Order by price lowest to highest </a></div>
 <div> <a href="/products?sort=price&sort_order=desc"> Order by price highest to lowest </a></div>
 <div><a href="/products?discount=true">Discount Items</a></div>
@@ -14,20 +16,24 @@
         Name: <a href="/products/<%= product.id %>"> <%= product.name %>  </a>
         <p> Price: $<%= product.price %>   Desc: <%= product.description %>  </p>
         <p> Remaining: <%= product.remaining %>     Supplier: <%= product.supplier.name %></p>
+        <% if product.images.find_by(favorite: true) == nil %>
+        <% else %>
         <img class= "size" src="<%= product.images.find_by(favorite: true).url %>">
+        <% end %>
         <!-- <img class= "size" src="<%# product.images.where(favorite: true).last.url %>"> -->
-          
+         <% if current_user && current_user.admin %> 
         <div id ="navigation">
         <ul>
         <li><%= link_to "Show", "/products/#{product.id}", method: :get %></li>   
-        <li><%= link_to "Edit", "/products/#{product.id}/edit", method: :get %> </li>  
+        <li><%= link_to "Edit Product", "/products/#{product.id}/edit", method: :get %> </li>  
+        <li> <%= link_to "Delete Product", "/products/#{product.id}", data: {confirm: "Are you sure?"}, method: :delete  %></li> 
         <li><%= link_to "Add Image", "/products/#{product.id}/images/new", method: :get %> </li> 
         <li><%= link_to "Edit Image ", "/products/#{product.id}/images/edit", method: :get %> </li> 
-        <li> <%= link_to "Delete", "/products/#{product.id}", data: {confirm: "Are you sure?"}, method: :delete  %></li> 
         <li> <%= link_to "Delete Image", "/products/#{product.id}/image", data: {confirm: "Are you sure?"}, method: :delete  %>
         </li> 
         </ul>
          </div>
+         <% end %>
      </div>
  <% end %>
  </div>

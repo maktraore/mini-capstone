@@ -12,6 +12,9 @@ body {
   a {
     color: red;
   }
+  a:hover { 
+    background-color: white;
+}
   input {
     color: black;
   }
@@ -42,4 +45,7 @@ body {
 .alert {
   margin-top: -35px;
 }
+}
+.red{
+  color: red;
 }
