@@ -9,19 +9,7 @@
   </head>
 
   <body>
-  <div class="navbar-form navbar-right right">
-  <% if !current_user %>
-      <a class = "right" href="/signup">Sign up for an account</a>
-      <a class = "right" href="/login">log in</a>
-      <% else %>
-      <a class = "far_right" href="/logout">log out</a>
-      <% end %>
-   <%= form_tag "/search", method: :post do %>
-        <p class="right">Search: <input type="text" name="search">
-        <input type="submit" value="Submit" >
-        </p>
-      <% end %>
-      
+  <%= render "layouts/nav" %>
       </div>
      <% flash.each do |name, message| %>
      <div class ="alert alert-<%= name  %> alert-
@@ -30,6 +18,7 @@
      <%= message %></div>
      <% end %>
      <div class="container">
+
     <%= yield %>
     </div>
   </body>

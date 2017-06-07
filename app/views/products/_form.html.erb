@@ -1,0 +1,18 @@
+  <% if @product && @product.errors.any? %>
+<h3 class="red"><%= pluralize(@product.errors.count, "error") %></h3>
+<ul>
+  <% @product.errors.full_messages.each do |msg| %>
+    <li class="red"><%= msg %></li>
+  <% end %>
+</ul>
+<% end %>
+<h1><%= heading %></h1>
+  <%= form_tag url, method: form_method do %>
+<div> Name: <input type="text" value = "<%= @product.name %>" name = "name_param"></div>
+<div> Price: <input type="text" value = "<%= @product.price %>" name = "price_param"></div>
+<div> Remaining: <input type="text" value = "<%= @product.remaining %>" name = "remaining_param"></div>
+<div> Description: <input type="text" value = "<%= @product.description %>" name = "description_param"></div>
+<p>URL: <input type="text" name="url"></p>
+  <input type="submit" value="Submit">
+
+<% end %>

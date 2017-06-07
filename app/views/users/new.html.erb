@@ -1,5 +1,9 @@
 
 <h2>Signup!</h2>
+<% if  @user.errors.full_messages.each do |msg| %>
+    <%= msg %>
+<% end %>
+<% end %>
 <%= form_tag "/users", method: :post  do %>
  <div > Name: <input type="text" name = "name"></div>
 <div class ="right"> Email: <input type="email" name = "email"></div>

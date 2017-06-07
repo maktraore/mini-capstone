@@ -1,18 +1,1 @@
-<h1>Create new product</h1>
-<% if @product && @product.errors.any? %>
-<h3 class="red"><%= pluralize(@product.errors.count, "error") %></h3>
-<ul>
-  <% @product.errors.full_messages.each do |msg| %>
-    <li class="red"><%= msg %></li>
-  <% end %>
-</ul>
-<% end %>
-<%= form_tag "/products", method: :post do %>
-<div> Name: <input type="text" name = "name_param", value="<%= @product.name %>"></div>
-<div> Price: <input type="text" name = "price_param", value= "<%= @product.price %>"> </div>
-<div> Description: <input type="text" name = "description_param", value="<%= @product.description %>"></div>
-<div> Remaining: <input type="text" name = "remaining_param", value="<%= @product.remaining %>"</div>
-<p>URL: <input type="text" name="url" value="<%= Image.where(product_id: @product.id).last %>"></p>
-<div> Supplier: <input type="text" name = "supplier_id" value= "<%= @product.supplier_id %>"></div>
-<div> <input type= "submit" value = "create your new prodcut"> </div>
-<% end %>
+<%= render "form", url: "/products", form_method: :post, heading: "Create new product"%>

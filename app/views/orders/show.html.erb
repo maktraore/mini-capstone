@@ -1,6 +1,7 @@
 <!--  Price: <%# @product.price %> Tax: <%# @product.tax %> Total: <%# @product.total %> <%# @product.supplier.name %> -->
+<div>Order Placed: </div>
 <div>Here is your order #: <%= @order.id %></div>
-<div>You ordered <%= pluralize(@order.quantity, @order.product.name) %> </div>
 <div>The subtotal is: <%= @order.subtotal %></div>
 <div>The tax is: <%= @order.tax %></div>
 <div>The total is: <%= @order.total %></div>
+<div> <%= link_to "Go Home", "/products" %></div>

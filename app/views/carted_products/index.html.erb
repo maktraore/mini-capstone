@@ -1,0 +1,13 @@
+<p>Products added: </p>
+ <% if current_user && current_user.carted_products.where(status: "carted") %>
+      <% @carts.each do |cart | %>
+  <ul>
+      <li><%=  cart.product.name%></li>
+      <li> <%= link_to "Delete from cart", "/carts/#{cart.id}", data: {confirm: "Are you sure?"}, method: :delete  %></li> 
+  </ul>
+      <% end %>
+  <div><%= button_to "Checkout", "/orders" %></div>
+  <% end %>
+
+  <div><a href="/products">Add more to product!</a></div>
+

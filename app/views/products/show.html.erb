@@ -1,10 +1,18 @@
-   Message: <p><%= @product.sale_message %> </p>
+<!--    Message: <p><%= @product.sale_message %> </p> -->
    <!-- <p>Price: <%= @product.price %> Tax: <%= @product.tax %> </p>
   <p>Total: <%= @product.total %> <%= @product.supplier.name %></p> -->
-    <%= form_tag "/orders", method: :post do %>
+  <p>Categories: </p>
+  <ul>
+      <% @product.categories.each do |category| %>
+      <li><%= category.name.capitalize %></li>
+      <% end %>
+  </ul>
+  <p>Add to Cart</p>
+   
+    <%= form_tag "/carts", method: :post do %>
     Quantity: <input type="text" name= "quantity">
-    Product ID: <input type="text" name="product_id" value="<%= @product.id %>">
-    Checkout: <input type="submit" value="checkout">
+   <input type="hidden" name="product_id" value="<%= @product.id %>">
+    Add to Cart: <input type="submit" value="Add to Cart">
     <% end %>
     <p><% @product.images.each do |image| %></p>
        <img class = "size" src = "<%= image.url %>">

@@ -1,8 +1,11 @@
 <!-- <h1>You have visited this page <%= pluralize(@visit_count, "number of time") %> </h1> -->
 <div class="container top">
 <% if current_user && current_user.admin %>
+You are an admin <%= current_user.name %>
+<div><a href="/users/edit"><p> Change user's role</p></a></div>
 <div><a href="/products/new"><h3> create new product !!!</h3></a></div>
 <% end %>
+<p> <a href="/carts"> Go to cart </a></p>
 <div> <a href="/products?sort=price&sort_order=asc"> Order by price lowest to highest </a></div>
 <div> <a href="/products?sort=price&sort_order=desc"> Order by price highest to lowest </a></div>
 <div><a href="/products?discount=true">Discount Items</a></div>
