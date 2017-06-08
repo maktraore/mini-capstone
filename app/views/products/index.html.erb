@@ -5,7 +5,7 @@ You are an admin <%= current_user.name %>
 <div><a href="/users/edit"><p> Change user's role</p></a></div>
 <div><a href="/products/new"><h3> create new product !!!</h3></a></div>
 <% end %>
-<p> <a href="/carts"> Go to cart </a></p>
+<p> <a href="/carts">Cart(<%= CartedProduct.where(user_id: current_user.id, status:"carted").count %>) </a></p>
 <div> <a href="/products?sort=price&sort_order=asc"> Order by price lowest to highest </a></div>
 <div> <a href="/products?sort=price&sort_order=desc"> Order by price highest to lowest </a></div>
 <div><a href="/products?discount=true">Discount Items</a></div>

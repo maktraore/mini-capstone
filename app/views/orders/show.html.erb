@@ -1,7 +1,9 @@
 <!--  Price: <%# @product.price %> Tax: <%# @product.tax %> Total: <%# @product.total %> <%# @product.supplier.name %> -->
+<% if @order %>
 <div>Order Placed: </div>
-<div>Here is your order #: <%= @order.id %></div>
-<div>The subtotal is: <%= @order.subtotal %></div>
-<div>The tax is: <%= @order.tax %></div>
-<div>The total is: <%= @order.total %></div>
+<div>Here is your  last order #:  <%= @order.id %></div>
+<div>The subtotal is:  <%= number_to_currency(@order.subtotal )%></div>
+<div>The tax is: <%= number_to_currency(@order.tax )%></div>
+<div>The total is: <%= number_to_currency(@order.total )%></div>
+<% end %>
 <div> <%= link_to "Go Home", "/products" %></div>
