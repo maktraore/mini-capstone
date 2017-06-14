@@ -16,8 +16,9 @@ class ImagesController < ApplicationController
       @image = Image.find_by(product_id: @product.id)
       if params[:favorite] == "Yes"
         @product.images.update_all(favorite: false)
-        @image.update(favorite: true) if @product.images
+        @image.update(favorite: true) 
       end
+
       # redirect_to "/products/#{@product.id}"
       redirect_to "/products"
     end
@@ -29,12 +30,12 @@ class ImagesController < ApplicationController
 
   def create
     Image.create(url: params[:url], product_id: params[:product_id], favorite: true)
-    redirect_to "/products/#{params[:product_id]}"
+    redirect_to "/products"
   end
    def destroy
      @product_images = Product.find_by(id: params[:product_id]).images
      @product_images.first.destroy
-     redirect_to "/products/#{params[:product_id]}"
+     redirect_to "/products"
      flash[:danger] = "Your product image has been deleted"
   end
 end

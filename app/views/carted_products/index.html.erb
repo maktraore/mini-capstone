@@ -3,7 +3,7 @@
       <% @carts.each do |cart | %>
   <ul>
       <li><%=  "#{cart.product.name} --> #{cart.quantity}"%></li>
-      
+      <li> <%= link_to "Edit the number", "/carts/#{cart.id}/edit"  %></li> 
       <li> <%= link_to "Delete from cart", "/carts/#{cart.id}", data: {confirm: "Are you sure?"}, method: :delete  %></li> 
   </ul>
       <% end %>

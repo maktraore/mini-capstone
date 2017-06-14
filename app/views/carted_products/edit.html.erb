@@ -1,0 +1,5 @@
+ <%= form_tag "/carts/#{@cart.id}", method: :patch do %>
+    Quantity: <input type="text" name= "quantity" value = "<%= @cart.quantity %>"
+   <input type="hidden" name="product_id" value="<%= @cart.product_id %>">
+    Add to Cart: <input type="submit" value="Add to Cart">
+    <% end %>

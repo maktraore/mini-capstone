@@ -36,15 +36,19 @@ class ProductsController < ApplicationController
     redirect_to "/products"
     flash[:info] = "Your product has been creatted"
       else
+      @suppliers = Supplier.all
        render 'new.html.erb'
       end
   end
   def new
     @product = Product.new
+    @suppliers = Supplier.all
     render 'new.html.erb'
   end
   def edit
+    @suppliers = Supplier.all
     @product = Product.find_by(id: params[:id])
+    @image = Image.find_by(product_id: params[:id])
     render 'edit.html.erb'
     # redirect_to "/products/#{@product.id}/edit"
   end
@@ -55,8 +59,8 @@ class ProductsController < ApplicationController
     @product.price = params[:price_param]
     @product.description = params[:description_param]
     @product.remaining = params[:remaining_param]
-    @product.supplier_id = params[:supplier_id]
-    @image.url = params[:url]
+    @product.supplier_id = 1
+    @image.update(url: params[:url], favorite: true)
     # Image.create(url: params[:url], product_id: params[:product_id])
     @product.save
     @image.save
